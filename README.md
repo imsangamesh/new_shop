@@ -1,16 +1,20 @@
 # new_shop
 
-A new Flutter project.
+hello there
 
-## Getting Started
+this is my another flutter project which is bit of advanced level in which 
+- you can add products to cart 
+- place your orders 
+- sell your own products
+- manage your products 
 
-This project is a starting point for a Flutter application.
+and i have used :
+- provider state management
+- intl  packages
 
-A few resources to get you started if this is your first Flutter project:
+it is my best app and i have took guide of Maximilian from Udemy 
+and don't order anything coz we don't have delivery services :)  
+but i bet that it is worth checking out
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+thankyou for visiting !
