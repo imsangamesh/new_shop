@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/cart.dart';
 import '../providers/products.dart';
 
 class ProductDetailScreen extends StatelessWidget {
@@ -14,6 +15,8 @@ class ProductDetailScreen extends StatelessWidget {
       context,
       listen: false,
     ).findById(productId);
+    final cart = Provider.of<Cart>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(loadedProduct.title),
@@ -36,8 +39,8 @@ class ProductDetailScreen extends StatelessWidget {
             Text(
               '\$${loadedProduct.price}',
               style: TextStyle(
-                color: Colors.grey,
-                fontSize: 20,
+                color: Colors.pink,
+                fontSize: 25,
               ),
             ),
             SizedBox(
@@ -48,11 +51,23 @@ class ProductDetailScreen extends StatelessWidget {
               width: double.infinity,
               child: Text(
                 loadedProduct.description,
-                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                ),
                 softWrap: true,
               ),
             )
           ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.add_shopping_cart,
+        ),
+        onPressed: () => cart.addItem(
+          loadedProduct.id,
+          loadedProduct.price,
+          loadedProduct.title,
         ),
       ),
     );
