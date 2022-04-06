@@ -211,9 +211,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         color: Colors.grey,
                       ),
                     ),
-                    child: _imageUrlController.text.isEmpty
-                        ? Image.network(
-                            'https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg?size=626&ext=jpg&uid=R65626931&ga=GA1.2.1218116275.1648890617',
+                    child: _imageUrlController.text == null
+                        ? Image.asset(
+                            'assets/images/containerImage.webp',
+                            fit: BoxFit.cover,
                           )
                         : FittedBox(
                             child: Image.network(

@@ -7,6 +7,8 @@ import '../providers/products.dart';
 class ProductDetailScreen extends StatelessWidget {
   static const routeName = '/product-detail';
 
+  const ProductDetailScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final productId =
@@ -24,7 +26,7 @@ class ProductDetailScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Container(
+            SizedBox(
               height: 300,
               width: double.infinity,
               child: Hero(
@@ -35,23 +37,23 @@ class ProductDetailScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               '\$${loadedProduct.price}',
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.pink,
                 fontSize: 25,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               width: double.infinity,
               child: Text(
                 loadedProduct.description,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                 ),
                 softWrap: true,
@@ -61,7 +63,7 @@ class ProductDetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(
+        child: const Icon(
           Icons.add_shopping_cart,
         ),
         onPressed: () => cart.addItem(

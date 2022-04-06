@@ -13,28 +13,28 @@ class CartScreen extends StatelessWidget {
     final cart = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Your Cart'),
+        title: const Text('Your Cart'),
       ),
       body: Column(
         children: <Widget>[
           Card(
-            margin: EdgeInsets.all(15),
+            margin: const EdgeInsets.all(15),
             child: Padding(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 13,
                 vertical: 8,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(
+                  const Text(
                     'Total :',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Chip(
                     label: Text(
                       '\$ ${cart.totalAmount.toStringAsFixed(2)}',
@@ -50,8 +50,8 @@ class CartScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10),
-          if (cart.items.length != 0)
+          const SizedBox(height: 10),
+          if (cart.items.isNotEmpty)
             Expanded(
               child: ListView.builder(
                 itemCount: cart.items.length,
@@ -71,7 +71,7 @@ class CartScreen extends StatelessWidget {
                 children: [
                   Image.asset('assets/images/newCartItem.png'),
                   const SizedBox(height: 10),
-                  Text(
+                  const Text(
                     'no products added !',
                     style: TextStyle(
                       fontSize: 30,
@@ -84,7 +84,7 @@ class CartScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        label: Text('ORDER NOW'),
+        label: const Text('ORDER NOW'),
         onPressed: () {
           Provider.of<Orders>(context, listen: false).addOrder(
             cart.items.values.toList(),

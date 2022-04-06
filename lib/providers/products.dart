@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import './product.dart';
 
 class Products with ChangeNotifier {
-  List<Product> _items = [
+  final List<Product> _items = [
     Product(
       id: 'p1',
       title: 'Black Sweater',
@@ -103,16 +103,6 @@ class Products with ChangeNotifier {
     return _items.firstWhere((prod) => prod.id == id);
   }
 
-  // void showFavoritesOnly() {
-  //   _showFavoritesOnly = true;
-  //   notifyListeners();
-  // }
-
-  // void showAll() {
-  //   _showFavoritesOnly = false;
-  //   notifyListeners();
-  // }
-
   void addProduct(Product product) {
     final newProduct = Product(
       title: product.title,
@@ -122,7 +112,6 @@ class Products with ChangeNotifier {
       id: DateTime.now().toString(),
     );
     _items.add(newProduct);
-    // _items.insert(0, newProduct); // at the start of the list
     notifyListeners();
   }
 
