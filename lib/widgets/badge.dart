@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../screens/cart_screen.dart';
 
 class Badge extends StatelessWidget {
-  const Badge(this.value);
+  Badge(this.value);
 
   final String value;
 

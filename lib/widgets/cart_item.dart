@@ -24,14 +24,14 @@ class CartItem extends StatelessWidget {
       key: ValueKey(id),
       background: Container(
         color: Theme.of(context).errorColor,
-        child: Icon(
+        child: const Icon(
           Icons.delete,
           color: Colors.white,
           size: 40,
         ),
         alignment: Alignment.centerRight,
         // padding: EdgeInsets.only(right: 20),
-        margin: EdgeInsets.symmetric(
+        margin: const EdgeInsets.symmetric(
           horizontal: 15,
           vertical: 4,
         ),
@@ -41,7 +41,7 @@ class CartItem extends StatelessWidget {
         return showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: Text('Do you want to remove the item from the cart?'),
+            title: const Text('Do you want to remove the item from the cart?'),
             // content: Text(
             //   'Do you want to remove the item from the cart?',
             // ),
@@ -50,13 +50,13 @@ class CartItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TextButton.icon(
-                    label: Text('No'),
-                    icon: Icon(Icons.close),
+                    label: const Text('No'),
+                    icon: const Icon(Icons.close),
                     onPressed: () => Navigator.of(ctx).pop(false),
                   ),
                   TextButton.icon(
-                    label: Text('Yes'),
-                    icon: Icon(Icons.check),
+                    label: const Text('Yes'),
+                    icon: const Icon(Icons.check),
                     onPressed: () => Navigator.of(ctx).pop(true),
                   ),
                 ],
@@ -69,7 +69,7 @@ class CartItem extends StatelessWidget {
         Provider.of<Cart>(context, listen: false).removeItem(productId);
       },
       child: Card(
-        margin: EdgeInsets.symmetric(
+        margin: const EdgeInsets.symmetric(
           horizontal: 15,
           vertical: 4,
         ),
@@ -77,7 +77,7 @@ class CartItem extends StatelessWidget {
           leading: CircleAvatar(
             radius: 27.5,
             child: Padding(
-              padding: EdgeInsets.all(7),
+              padding: const EdgeInsets.all(7),
               child: FittedBox(
                 child: Text('\$$price'),
               ),

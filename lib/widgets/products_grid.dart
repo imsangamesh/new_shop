@@ -20,7 +20,7 @@ class ProductsGrid extends StatelessWidget {
         value: products[i],
         child: ProductItem(),
       ),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 2 / 2.55,
         crossAxisSpacing: 10,

@@ -10,17 +10,17 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           AppBar(
-            title: Text('My Shop'),
+            title: const Text('My Shop'),
             automaticallyImplyLeading: false,
           ),
-          Divider(),
+          const Divider(),
           ListTile(
             leading: Icon(
               Icons.shop,
               size: 30,
               color: Theme.of(context).primaryColor,
             ),
-            title: Text(
+            title: const Text(
               'Shop',
               style: TextStyle(
                 fontSize: 20,
@@ -30,7 +30,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.of(context).pushReplacementNamed('/');
             },
           ),
-          Divider(
+          const Divider(
             thickness: 1.3,
             indent: 10,
             endIndent: 20,
@@ -41,7 +41,7 @@ class AppDrawer extends StatelessWidget {
               size: 30,
               color: Theme.of(context).primaryColor,
             ),
-            title: Text(
+            title: const Text(
               'Orders',
               style: TextStyle(
                 fontSize: 20,
@@ -52,7 +52,7 @@ class AppDrawer extends StatelessWidget {
                   .pushReplacementNamed(OrdersScreen.routeName);
             },
           ),
-          Divider(
+          const Divider(
             thickness: 1.3,
             indent: 10,
             endIndent: 20,
@@ -63,7 +63,7 @@ class AppDrawer extends StatelessWidget {
               size: 30,
               color: Theme.of(context).primaryColor,
             ),
-            title: Text(
+            title: const Text(
               'Manage Products',
               style: TextStyle(
                 fontSize: 20,

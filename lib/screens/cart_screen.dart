@@ -64,7 +64,7 @@ class CartScreen extends StatelessWidget {
                 ),
               ),
             ),
-          if (cart.items.length == 0)
+          if (cart.items.isEmpty)
             Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -84,14 +84,21 @@ class CartScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
+        backgroundColor:
+            cart.itemCount == 0 ? Colors.grey : Theme.of(context).accentColor,
+        disabledElevation: 0,
         label: const Text('ORDER NOW'),
-        onPressed: () {
-          Provider.of<Orders>(context, listen: false).addOrder(
-            cart.items.values.toList(),
-            cart.totalAmount,
-          );
-          cart.clear();
-        },
+        onPressed: cart.itemCount == 0
+            ? null
+            : () {
+                try {
+                  Provider.of<Orders>(context, listen: false).addOrder(
+                    cart.items.values.toList(),
+                    cart.totalAmount,
+                  );
+                  cart.clear();
+                } catch (e) {}
+              },
       ),
     );
   }
