@@ -107,84 +107,118 @@ class _AuthScreenState extends State<AuthScreen> {
               end: Alignment.bottomCenter,
             ),
           ),
-          padding: const EdgeInsets.all(17),
+          padding: EdgeInsets.only(
+            top: 17,
+            left: 17,
+            right: 17,
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
           child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Card(
-                    shape: RoundedRectangleBorder(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  elevation: 10,
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
+                      color: const Color.fromARGB(255, 255, 236, 180),
                     ),
-                    elevation: 10,
-                    child: Container(
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: const Color.fromARGB(255, 255, 236, 180),
-                      ),
-                      child: Text(
-                        'SANShop',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w900,
-                        ),
+                    child: Text(
+                      'SANShop',
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w900,
                       ),
                     ),
                   ),
-                  Card(
-                    elevation: 16,
-                    shape: RoundedRectangleBorder(
+                ),
+                Card(
+                  elevation: 16,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(17),
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(17),
+                      color: const Color.fromARGB(132, 255, 251, 251),
                     ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(17),
-                        color: const Color.fromARGB(132, 255, 251, 251),
-                      ),
-                      padding: const EdgeInsets.all(13),
-                      height: _authMode == AuthMode.signUp
-                          ? _isError
-                              ? _deviceSize.height * 0.463
-                              : _deviceSize.height * 0.42
-                          : _isError
-                              ? _deviceSize.height * 0.39
-                              : _deviceSize.height * 0.33,
-                      child: Form(
-                        key: _form,
-                        child: ListView(
-                          //_deviceSize.height * 0.42
-                          children: [
-                            TextFormField(
-                              // ---------------------------------1-------------------
-                              validator: (value) {
-                                if (value.isEmpty) {
-                                  return 'please provide your email.';
-                                } else if (!value.contains('@')) {
-                                  return 'please provide a valid email address.';
-                                } else {
-                                  return null;
-                                }
-                              },
-                              decoration: const InputDecoration(
-                                labelText: 'email address',
-                                hintText: 'eg:  san.sangamesh96@gmail.com',
-                              ),
-                              textInputAction: TextInputAction.next,
-                              keyboardType: TextInputType.emailAddress,
-                              onChanged: (value) {
-                                _email = value;
-                              },
+                    padding: const EdgeInsets.all(13),
+                    height: _authMode == AuthMode.signUp
+                        ? _isError
+                            ? _deviceSize.height * 0.463
+                            : _deviceSize.height * 0.42
+                        : _isError
+                            ? _deviceSize.height * 0.39
+                            : _deviceSize.height * 0.33,
+                    child: Form(
+                      key: _form,
+                      child: ListView(
+                        //_deviceSize.height * 0.42
+                        children: [
+                          TextFormField(
+                            // ---------------------------------1-------------------
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'please provide your email.';
+                              } else if (!value.contains('@')) {
+                                return 'please provide a valid email address.';
+                              } else {
+                                return null;
+                              }
+                            },
+                            decoration: const InputDecoration(
+                              labelText: 'email address',
+                              hintText: 'eg:  san.sangamesh96@gmail.com',
                             ),
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.emailAddress,
+                            onChanged: (value) {
+                              _email = value;
+                            },
+                          ),
+                          TextFormField(
+                            // ---------------------------------2-------------------
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'please provide your password.';
+                              } else if (value.length <= 5) {
+                                return 'password should be atleast 6 characters long.';
+                              } else {
+                                return null;
+                              }
+                            },
+                            decoration: const InputDecoration(
+                              labelText: 'password',
+                              hintText: 'eg:  itsAsecret',
+                            ),
+                            textInputAction: _authMode == AuthMode.login
+                                ? TextInputAction.done
+                                : TextInputAction.next,
+                            obscureText: true,
+                            keyboardType: TextInputType.visiblePassword,
+                            onChanged: (value) {
+                              _confirmPwd1 = value;
+                            },
+                            onFieldSubmitted: _authMode == AuthMode.login
+                                ? (_) => _saveForm()
+                                : null,
+                          ),
+                          if (_authMode == AuthMode.signUp)
                             TextFormField(
-                              // ---------------------------------2-------------------
+                              // ---------------------------------3-------------------
                               validator: (value) {
                                 if (value.isEmpty) {
                                   return 'please provide your password.';
                                 } else if (value.length <= 5) {
                                   return 'password should be atleast 6 characters long.';
+                                } else if (_confirmPwd1 != _confirmPwd2) {
+                                  return 'both passwords should be same.';
                                 } else {
                                   return null;
                                 }
@@ -193,82 +227,51 @@ class _AuthScreenState extends State<AuthScreen> {
                                 labelText: 'password',
                                 hintText: 'eg:  itsAsecret',
                               ),
-                              textInputAction: _authMode == AuthMode.login
-                                  ? TextInputAction.done
-                                  : TextInputAction.next,
+                              textInputAction: TextInputAction.done,
                               obscureText: true,
                               keyboardType: TextInputType.visiblePassword,
                               onChanged: (value) {
-                                _confirmPwd1 = value;
+                                _confirmPwd2 = value;
                               },
-                              onFieldSubmitted: _authMode == AuthMode.login
+                              onFieldSubmitted: _authMode == AuthMode.signUp
                                   ? (_) => _saveForm()
                                   : null,
                             ),
-                            if (_authMode == AuthMode.signUp)
-                              TextFormField(
-                                // ---------------------------------3-------------------
-                                validator: (value) {
-                                  if (value.isEmpty) {
-                                    return 'please provide your password.';
-                                  } else if (value.length <= 5) {
-                                    return 'password should be atleast 6 characters long.';
-                                  } else if (_confirmPwd1 != _confirmPwd2) {
-                                    return 'both passwords should be same.';
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                decoration: const InputDecoration(
-                                  labelText: 'password',
-                                  hintText: 'eg:  itsAsecret',
-                                ),
-                                textInputAction: TextInputAction.done,
-                                obscureText: true,
-                                keyboardType: TextInputType.visiblePassword,
-                                onChanged: (value) {
-                                  _confirmPwd2 = value;
-                                },
-                                onFieldSubmitted: _authMode == AuthMode.signUp
-                                    ? (_) => _saveForm()
-                                    : null,
-                              ),
-                            const SizedBox(height: 20),
-                            ElevatedButton.icon(
-                              onPressed: () {
-                                _saveForm();
-                                setState(() => _authMode = AuthMode.login);
-                              },
-                              icon: const Icon(Icons.login_rounded),
-                              label: const Text(
-                                'Login',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                          const SizedBox(height: 20),
+                          ElevatedButton.icon(
+                            onPressed: () {
+                              _saveForm();
+                              setState(() => _authMode = AuthMode.login);
+                            },
+                            icon: const Icon(Icons.login_rounded),
+                            label: const Text(
+                              'Login',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            TextButton(
-                              onPressed: () {
-                                _saveForm();
-                                setState(() => _authMode = AuthMode.signUp);
-                              },
-                              child: const Text(
-                                'Sign Up',
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              _saveForm();
+                              setState(() => _authMode = AuthMode.signUp);
+                            },
+                            child: const Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                  const SizedBox(height: 40),
-                ],
-              ),
+                ),
+                const SizedBox(height: 40),
+              ],
             ),
           ),
         ),
