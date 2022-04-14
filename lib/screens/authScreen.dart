@@ -57,11 +57,11 @@ class _AuthScreenState extends State<AuthScreen> {
       if (_authMode == AuthMode.login) {
         // log user in
         await Provider.of<Auth>(context, listen: false)
-            .login(_email, _confirmPwd1);
+            .login(_email.trim(), _confirmPwd1);
       } else {
         // sign user in
         await Provider.of<Auth>(context, listen: false)
-            .signUp(_email, _confirmPwd1);
+            .signUp(_email.trim(), _confirmPwd1);
       }
     } on MyHttpException catch (error) {
       setState(() => _isLoading = false);

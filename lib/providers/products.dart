@@ -8,6 +8,7 @@ import './product.dart';
 
 class Products with ChangeNotifier {
   Products(this.authToken, this._items);
+
   final String authToken;
   List<Product> _items = [
     // Product(
